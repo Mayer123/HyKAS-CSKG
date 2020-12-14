@@ -31,6 +31,7 @@ GPT2-Large | CWWV | [Download](https://drive.google.com/file/d/1dnqdW-5d6tULZfDa
 GPT2-Large | CSKG | [Download](https://drive.google.com/file/d/1VUBAxtyKElmbNTxSkIdPjR88PkEjbc-2/view?usp=sharing)
 
 If you would like to train models from scratch, you can use the following commands under src/Training
+
 For RoBERTa
 ```
 CUDA_VISIBLE_DEVICES=0 python run_pretrain.py --model_type roberta-mlm --model_name_or_path roberta-large --task_name cskg --output_dir ../../out_dir --max_sequence_per_time 200 \
@@ -66,6 +67,7 @@ CUDA_VISIBLE_DEVICES=0 python run_mlm_roberta.py --model_type roberta-mlm --mode
 --do_train --do_eval --per_gpu_train_batch_size 8 --gradient_accumulation_steps 4 --learning_rate 1e-5 --num_train_epochs 3 --warmup_proportion 0.05 --evaluate_during_training \
 --per_gpu_eval_batch_size 8 --save_steps 5000
 ```
+Then follow the same evaluation commands as above to evaluate the models
 
 ## AFLite
 To generate adversarial filtered datasets using AFLite algorithm, first run the data generation code with --do_split flag 
@@ -89,7 +91,7 @@ To run AFLite
 ```
 python run_AFLite.py --train_file ../../data/ATOMIC/train_95%_random.jsonl  --dev_file ../../data/ATOMIC/dev_random.jsonl 
 ```
-This will produce the AFLite filtered output files at the same location as input files.
+This will produce the AFLite filtered output files at the same location as input files, which can be used for pretraining the models. 
 
 ## Cite 
 ```
