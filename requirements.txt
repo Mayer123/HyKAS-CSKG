@@ -1,0 +1,7 @@
+torch==1.5.1
+transformers==3.0.2
+overrides==3.0.0
+ftfy==5.6
+nltk==3.4.5
+sentence-transformers=0.3.4
+tensorboard==2.0
