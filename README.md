@@ -1,5 +1,5 @@
-# Knowledge-driven Data Construction for Zero-shot Evaluationin Commonsense Question Answering
-This repository contains the code for the paper "Knowledge-driven Data Construction for Zero-shot Evaluationin Commonsense Question Answering" (AAAI 2021). See full paper [here](https://arxiv.org/abs/2011.03863)
+# Knowledge-driven Data Construction for Zero-shot Evaluation in Commonsense Question Answering
+This repository contains the code for the paper "Knowledge-driven Data Construction for Zero-shot Evaluation in Commonsense Question Answering" (AAAI 2021). See full paper [here](https://arxiv.org/abs/2011.03863)
 
 Note that our evaluation code is adpated from [self-talk repo](https://github.com/vered1986/self_talk)
 
