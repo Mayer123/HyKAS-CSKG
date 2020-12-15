@@ -12,12 +12,24 @@ pip install -r requirements.txt
 ## Data generation
 Our synthetic QA sets can be downloaded from [here](https://drive.google.com/file/d/1qp2Exh88m1LT8iyDvt8TOAXhGdHQhP2B/view?usp=sharing), uncompress it and place it in the HyKAS-CSKG root directory.
 
-If you would like to generate data from scratch, first cd to src/Data_generation directory,
-For ATOMIC synthetic sets, download the ATOMIC from [official website](https://homes.cs.washington.edu/~msap/atomic/) and uncompress
-Then simply run
+If you would like to generate data from scratch, first `cd` to the `src/Data_generation` directory.
+
+For the **ATOMIC** synthetic sets, download the ATOMIC from [official website](https://homes.cs.washington.edu/~msap/atomic/) and uncompress.
+Then run
 ```
 python generate_from_ATOMIC.py --train_KG atomic/v4_atomic_trn.csv --dev_KG atomic/v4_atomic_dev.csv --strategy random --out_dir ../../data/ATOMIC  
 ```
+
+For **CWWV**, download the `cskg_connected.tsv` from [here](https://drive.google.com/file/d/11TiW3pAHnt6l8yuIWpowzOMuM8fq7ff6/view?usp=sharing) and `cache.pkl` from [here](https://drive.google.com/file/d/19tcSaKi-Efz8IH-HX0oBkYtalnqOseZj/view?usp=sharing), then run:
+```
+python generate_from_CWWV.py --cskg_file cskg_connected.tsv  --emb_file embeddings.tsv [--adv] --dist_against Q_OR_A --lex_cache cache.pkl --output_file CWWV_ALL_FILE
+python filter_CWWV.py --input_file CWWV_ALL_FILE --output_dir OUTPUT_DIR
+```
+
+Note that we used the output file `cskg_omcs.jsonl` in our experiments.
+
+If `--adv` is set, then an adversarial strategy is used. The flag `dist_against` indicates whether the filter against the question (value "q") or the answer ("a").
+
 
 ## Pretraining on Synthetic QA sets
 We provide following pretrained models 
