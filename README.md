@@ -22,14 +22,9 @@ python generate_from_ATOMIC.py --train_KG atomic/v4_atomic_trn.csv --dev_KG atom
 
 For **CWWV**, download the `cskg_connected.tsv` from [here](https://drive.google.com/file/d/11TiW3pAHnt6l8yuIWpowzOMuM8fq7ff6/view?usp=sharing) and `cache.pkl` from [here](https://drive.google.com/file/d/19tcSaKi-Efz8IH-HX0oBkYtalnqOseZj/view?usp=sharing), then run:
 ```
-python generate_from_CWWV.py --cskg_file cskg_connected.tsv  --emb_file embeddings.tsv [--adv] --dist_against Q_OR_A --lex_cache cache.pkl --output_file CWWV_ALL_FILE
-python filter_CWWV.py --input_file CWWV_ALL_FILE --output_dir OUTPUT_DIR
+python generate_from_CWWV.py --cskg_file cskg_connected.tsv --lex_cache cache.pkl --output_dir ../../data/CWWV --strategy random
+python filter_CWWV.py --input_file ../../data/CWWV/random.jsonl 
 ```
-
-Note that we used the output file `cskg_omcs.jsonl` in our experiments.
-
-If `--adv` is set, then an adversarial strategy is used. The flag `dist_against` indicates whether the filter against the question (value "q") or the answer ("a").
-
 
 ## Pretraining on Synthetic QA sets
 We provide following pretrained models 

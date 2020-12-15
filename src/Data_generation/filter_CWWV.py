@@ -3,6 +3,7 @@ import json
 from tqdm import tqdm
 import argparse
 import random 
+import os
 random.seed(1)
 threshold=1e-06
 
@@ -25,7 +26,7 @@ if __name__=="__main__":
 						help="Input file with artificial QA data")
 	parser.add_argument('--do_split', action="store_true", help="Further split training set into subsets for AFLite")
 	args = parser.parse_args()
-	
+
 	common_concepts_omcs=[]
 	with open(args.input_file, 'r') as f:
 		for line in tqdm(f, total=500000):
@@ -42,8 +43,9 @@ if __name__=="__main__":
 	random.shuffle(common_concepts_omcs)
 	train_set = common_concepts_omcs[:int(len(common_concepts_omcs)*0.95)]
 	dev_set = common_concepts_omcs[int(len(common_concepts_omcs)*0.95):]
-	write_data(train_set, 'train_'+args.input_file)
-	write_data(dev_set, 'dev_'+args.input_file)
+	basename = os.path.basename(args.input_file)
+	write_data(train_set, args.input_file.replace(basename, 'train_'+basename))
+	write_data(dev_set, args.input_file.replace(basename, 'dev_'+basename))
 	if args.do_split:
 		assert 'random' in args.input_file
 		print ('splitting train into subsets, which can be used for AFLite (only valid for random strategy)')

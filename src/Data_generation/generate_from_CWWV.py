@@ -178,10 +178,10 @@ def generate_questions(qa_pairs, rel_tails, answer_heads, output_file, embedding
 	print(Counter(all_min_probs))
 
 def get_labels(data):
-    if '|' in data:
-        return data.split('|')
-    else:
-        return [data]
+	if '|' in data:
+		return data.split('|')
+	else:
+		return [data]
 
 def question_to_sentence(q):
 	return q.replace('[MASK]', '').strip()
@@ -216,11 +216,11 @@ def build_embeddings(sentences, out_dir, model_name='roberta-large-nli-stsb-mean
 			embeddings=data['embeddings']
 			sentences=data['sentences']
 			return embeddings
-    model = SentenceTransformer(model_name)
-    embeddings = model.encode(sentences, show_progress_bar=True, device=0, num_workers=4)
-    with open(emb_file, "wb") as fout:
-        pkl.dump({'sentences': sentences, 'embeddings': embeddings}, fout, protocol=pkl.HIGHEST_PROTOCOL)
-    return embeddings
+	model = SentenceTransformer(model_name)
+	embeddings = model.encode(sentences, show_progress_bar=True, device=0, num_workers=4)
+	with open(emb_file, "wb") as fout:
+		pkl.dump({'sentences': sentences, 'embeddings': embeddings}, fout, protocol=pkl.HIGHEST_PROTOCOL)
+	return embeddings
 
 def create_indices(cskg_file, lex_cache):
 	qa_pairs=defaultdict(list)
@@ -306,18 +306,18 @@ if __name__ == '__main__':
 	lex_cache=None
 	lex_cache=pkl.load(open(args.lex_cache, 'rb'))
 	qa_pairs, all_tails, rel_tails, answer_heads, q_sentences=create_indices(args.cskg_file, lex_cache)
+	print('Collecting sentences')
+	sentences=list(all_tails) + q_sentences
 	print(len(sentences), 'sentences', len(all_tails), 'answers', len(qa_pairs.keys()), 'qa pairs')
 	if args.strategy == 'adv-answer' or args.strategy == 'adv-question':
 		print ('Using %s strategy' % args.strategy)
-		print('Collecting sentences')
-		sentences=list(all_tails) + q_sentences
 		print('Computing embeddings')
 		embeddings=build_embeddings(sentences, args.out_dir)
 		print(len(embeddings), 'embeddings')
 	else:
 		embeddings = None
 	sentence2id={word:i for i, word in enumerate(sentences)}
-	output_file = os.path.join(args.out_dir, args.strategy+'.jsonl')
+	output_file = path.join(args.out_dir, args.strategy+'.jsonl')
 	generate_questions(qa_pairs, rel_tails, answer_heads, output_file, embeddings, sentence2id, sentences, args.strategy, args.limit)
 	
 		
