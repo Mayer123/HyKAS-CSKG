@@ -103,7 +103,7 @@ This will produce the AFLite filtered output files at the same location as input
 ## Cite 
 ```
 @misc{ma2020knowledgedriven,
-    title={Knowledge-driven Self-supervision for Zero-shot Commonsense Question Answering},
+    title={Knowledge-driven Data Construction for Zero-shot Evaluation in Commonsense Question Answering},
     author={Kaixin Ma and Filip Ilievski and Jonathan Francis and Yonatan Bisk and Eric Nyberg and Alessandro Oltramari},
     year={2020},
     eprint={2011.03863},
