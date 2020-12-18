@@ -358,7 +358,7 @@ def main():
 						help="Pretrained config name or path if not the same as model_name")
 	parser.add_argument("--tokenizer_name", default="", type=str,
 						help="Pretrained tokenizer name or path if not the same as model_name")
-	parser.add_argument("--cache_dir", default="", type=str, required=True,
+	parser.add_argument("--cache_dir", default="", type=str,
 						help="Where do you want to store the pre-trained models downloaded from s3")
 	parser.add_argument("--task_name", default=None, type=str, required=True,
 						help="The name of the task to train selected in the list: " + ", ".join(myprocessors.keys()))
